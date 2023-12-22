@@ -1,0 +1,39 @@
+{
+    "name": "brucelwayne/laravel-package-searchable",
+    "description": "",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bruce Wayne"
+        }
+    ],
+    "require": {
+        "laravel/scout": "^10.0"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "Brucelwayne\\Searchable\\": "src"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Brucelwayne\\Searchable\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Brucelwayne\\Searchable\\SearchableServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    }
+}
