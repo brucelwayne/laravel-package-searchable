@@ -1,6 +1,6 @@
 <?php
 
-namespace Brucelwayne\SEO;
+namespace Brucelwayne\Searchable;
 
 use Illuminate\Support\ServiceProvider;
 

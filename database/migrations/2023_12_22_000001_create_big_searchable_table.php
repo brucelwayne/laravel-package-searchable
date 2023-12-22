@@ -23,8 +23,8 @@ return new class extends Migration
 
             $table->json('payload');
 
+            $table->softDeletes()->index();
             $table->timestamps();
-
             $table->index('created_at');
             $table->index('updated_at');
         });
