@@ -41,6 +41,11 @@ class BigSearchableModel extends BaseMysqlModel
         'payload' => 'array',
     ];
 
+    protected $hidden = [
+        'big_searchable_type',
+        'big_searchable_id',
+    ];
+
     function big_searchable():MorphTo{
         return $this->morphTo();
     }
