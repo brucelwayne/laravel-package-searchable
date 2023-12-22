@@ -21,7 +21,7 @@ return new class extends Migration
 
             $table->morphs('big_searchable');
 
-            $table->json('payload');
+            $table->longText('payload');
 
             $table->softDeletes()->index();
             $table->timestamps();

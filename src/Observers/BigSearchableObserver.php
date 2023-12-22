@@ -29,12 +29,19 @@ class BigSearchableObserver
         $this->usingSoftDeletes = Config::get('scout.soft_delete', false);
     }
 
-    function getBigSearchableArray($model){
-        $data['big_searchable_type'] = get_class($model);
-        $data['big_searchable_id'] = $model->getKey();
-        $data['payload'] = $model->toBigSearchableArray();
-        if ( $model::hasSoftDelete()){
-            $data['__soft_deleted'] =  empty($this->deleted_at) ? 0 : 1;
+    function getBigSearchableArray($model)
+    {
+        $payload = method_exists($model, 'toBigSearchableArray') ? $model->toBigSearchableArray() : $model->toArray();
+        $payload = implode(' ', $payload);
+//        $phrases = RakePlus::create($payload)->sort()->get();
+        $data = [
+            'big_searchable_type' => get_class($model),
+            'big_searchable_id' => $model->getKey(),
+            'payload' => $payload,
+        ];
+
+        if ($model::hasSoftDelete()) {
+            $data['__soft_deleted'] = empty($this->deleted_at) ? 0 : 1;
         }
         return $data;
     }
@@ -45,7 +52,7 @@ class BigSearchableObserver
     public function saved($model)
     {
         $big_searchable = $model->big_searchable;
-        if (empty($big_searchable)){
+        if (empty($big_searchable)) {
             return BigSearchableModel::create($this->getBigSearchableArray($model));
         }
         return $model->big_searchable->save($this->getBigSearchableArray($model));
@@ -54,7 +61,8 @@ class BigSearchableObserver
     /**
      * @param HasBigSearchable $model
      */
-    public function updated($model){
+    public function updated($model)
+    {
         return $model->big_searchable->update($this->getBigSearchableArray($model));
     }
 

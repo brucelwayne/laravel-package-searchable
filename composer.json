@@ -9,7 +9,8 @@
         }
     ],
     "require": {
-        "laravel/scout": "^10.0"
+        "laravel/scout": "^10.0",
+        "donatello-za/rake-php-plus": "^1.0"
     },
     "require-dev": {
     },

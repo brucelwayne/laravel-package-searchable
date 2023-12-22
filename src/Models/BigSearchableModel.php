@@ -5,6 +5,7 @@ namespace Brucelwayne\Searchable\Models;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Laravel\Scout\Searchable;
 use Mallria\Core\Models\BaseMysqlModel;
+use MongoDB\Laravel\Eloquent\SoftDeletes;
 use Veelasky\LaravelHashId\Eloquent\HashableId;
 
 /**
@@ -17,6 +18,7 @@ class BigSearchableModel extends BaseMysqlModel
 {
     use HashableId;
     use Searchable;
+    use SoftDeletes;
 
     protected $table = 'big_searchable';
 
@@ -38,7 +40,6 @@ class BigSearchableModel extends BaseMysqlModel
     ];
 
     protected $casts = [
-        'payload' => 'array',
     ];
 
     protected $hidden = [
