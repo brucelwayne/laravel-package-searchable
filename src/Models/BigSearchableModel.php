@@ -7,6 +7,12 @@ use Laravel\Scout\Searchable;
 use Mallria\Core\Models\BaseMysqlModel;
 use Veelasky\LaravelHashId\Eloquent\HashableId;
 
+/**
+ * @property string big_searchable_type
+ * @property integer big_searchable_id
+ * @property array payload
+ *
+ */
 class BigSearchableModel extends BaseMysqlModel
 {
     use HashableId;
@@ -25,7 +31,28 @@ class BigSearchableModel extends BaseMysqlModel
         'hash',
     ];
 
-    function searchable():MorphTo{
+    protected $fillable = [
+        'big_searchable_type',
+        'big_searchable_id',
+        'payload',
+    ];
+
+    protected $casts = [
+        'payload' => 'array',
+    ];
+
+    function big_searchable():MorphTo{
         return $this->morphTo();
+    }
+
+    public function toSearchableArray()
+    {
+        return array(
+            'id' => strval($this->getKey()),
+            'big_searchable_type' => $this->big_searchable_type,
+            'big_searchable_id' => $this->big_searchable_id,
+            'payload' => $this->payload,
+            '__soft_deleted' => empty($this->deleted_at) ? 0 : 1,
+        );
     }
 }

@@ -19,7 +19,7 @@ return new class extends Migration
         Schema::create($this->table, function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->morphs('searchable');
+            $table->morphs('big_searchable');
 
             $table->json('payload');
 
