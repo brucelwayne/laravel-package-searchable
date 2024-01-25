@@ -20,7 +20,7 @@ class BigSearchableModel extends BaseMysqlModel
     use Searchable;
     use SoftDeletes;
 
-    protected $table = 'big_searchable';
+    protected $table = 'blw_big_searchable';
 
     protected $hashKey = BigSearchableModel::class;
 

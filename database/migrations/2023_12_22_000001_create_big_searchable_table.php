@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
 
-    protected $table = 'big_searchable';
+    protected $table = 'blw_big_searchable';
 
     /**
      * Run the migrations.
