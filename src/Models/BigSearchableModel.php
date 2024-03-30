@@ -23,31 +23,33 @@ class BigSearchableModel extends BaseMysqlModel
     protected $table = 'blw_big_searchable';
 
     protected $hashKey = BigSearchableModel::class;
+    protected $appends = [
+        'hash',
+    ];
+    protected $fillable = [
+        'big_searchable_type',
+        'big_searchable_id',
+        'payload',
+    ];
+    protected $casts = [
+    ];
+    protected $hidden = [
+        'big_searchable_type',
+        'big_searchable_id',
+    ];
+
+    function getMorphClass()
+    {
+        return 'big_searchable';
+    }
 
     function getRouteKeyName()
     {
         return 'hash';
     }
 
-    protected $appends = [
-        'hash',
-    ];
-
-    protected $fillable = [
-        'big_searchable_type',
-        'big_searchable_id',
-        'payload',
-    ];
-
-    protected $casts = [
-    ];
-
-    protected $hidden = [
-        'big_searchable_type',
-        'big_searchable_id',
-    ];
-
-    function big_searchable():MorphTo{
+    function big_searchable(): MorphTo
+    {
         return $this->morphTo();
     }
 
