@@ -2,19 +2,20 @@
 
 namespace Brucelwayne\Searchable;
 
+use Brucelwayne\Searchable\Models\BigSearchableModel;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
 
 class SearchableServiceProvider extends ServiceProvider
 {
     protected $module_name = 'searchable';
 
-    public function register()
-    {
-
-    }
-
     function boot()
     {
+        Relation::morphMap([
+            'big_searchable' => BigSearchableModel::class,
+        ]);
+
         $this->bootConfigs();
         $this->bootMigrations();
     }
@@ -22,12 +23,17 @@ class SearchableServiceProvider extends ServiceProvider
     protected function bootConfigs(): void
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/searchable.php', $this->module_name
+            __DIR__.'/../config/searchable.php', $this->module_name
         );
     }
 
     protected function bootMigrations(): void
     {
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+    }
+
+    public function register()
+    {
+
     }
 }
