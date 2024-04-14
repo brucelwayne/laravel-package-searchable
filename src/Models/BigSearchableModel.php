@@ -22,7 +22,7 @@ class BigSearchableModel extends BaseMysqlModel
 
     protected $table = 'blw_big_searchable';
 
-    protected $hashKey = BigSearchableModel::class;
+    protected $hashKey = 'blw_big_searchable';
     protected $appends = [
         'hash',
     ];
