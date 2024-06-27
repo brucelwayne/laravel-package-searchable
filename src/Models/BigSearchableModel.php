@@ -40,7 +40,7 @@ class BigSearchableModel extends BaseMysqlModel
 
     function getMorphClass()
     {
-        return 'big_searchable';
+        return $this->table;
     }
 
     function getRouteKeyName()
